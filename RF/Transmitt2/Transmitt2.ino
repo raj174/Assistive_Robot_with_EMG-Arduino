@@ -2,10 +2,10 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 
-RF24 radio(7, 8); // CE, CSN
+RF24 radio(2,3); // CE, CSN
 
 const uint64_t address[] = {0x7878787878LL, 0xB3B4B5B6F1LL, 0xB3B4B5B6CDLL};
-const int SensorValue = A0;
+const int SensorValue = A3;
 int Value;
 
 void setup() {

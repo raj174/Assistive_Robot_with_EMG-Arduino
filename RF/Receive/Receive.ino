@@ -7,7 +7,8 @@ byte pipeNum = 0;
 //const byte address[6]= "00001";
 const uint64_t address[] = {0x7878787878LL, 0xB3B4B5B6F1LL, 0xB3B4B5B6CDLL};
 
-void setup() {
+void setup() 
+{
   Serial.begin(9600);
   radio.begin();
   radio.openReadingPipe(0, address[0]);
