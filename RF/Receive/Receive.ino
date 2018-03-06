@@ -1,12 +1,3 @@
-/*
-* Arduino Wireless Communication Tutorial
-*       Example 1 - Receiver Code
-*                
-* by Dejan Nedelkovski, www.HowToMechatronics.com
-* 
-* Library: TMRh20/RF24, https://github.com/tmrh20/RF24/
-*/
-
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
@@ -28,10 +19,12 @@ void setup() {
 }
 
 void loop() {
-  if (radio.available(&pipeNum)) {
-    char text[32] = "";
+  if (radio.available(&pipeNum)) 
+  {
+    int text;
     radio.read(&text, sizeof(text));
     Serial.print(pipeNum);
     Serial.println(text);
   }
+
 }

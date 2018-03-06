@@ -1,4 +1,3 @@
-
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
@@ -13,8 +12,9 @@ int Value;
 void setup()
 {
   radio.begin();
+  Serial.begin(9600);
   radio.openWritingPipe(address[0]);
-  radio.openReadingPipe(0, address[1]);
+  radio.openReadingPipe(0, address[3]);
   radio.setPALevel(RF24_PA_MIN);
   radio.stopListening();
 }
@@ -22,6 +22,9 @@ void setup()
 void loop()
 {
   Value = analogRead(SensorValue);
+  Serial.println(Value);
+  if(Value>900)
+  {
   radio.write(&Value, sizeof(Value));
-  delay(1000);
+  }
 }

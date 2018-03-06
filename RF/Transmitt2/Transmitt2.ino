@@ -6,6 +6,7 @@ RF24 radio(7, 8); // CE, CSN
 
 const uint64_t address[] = {0x7878787878LL, 0xB3B4B5B6F1LL, 0xB3B4B5B6CDLL};
 const int SensorValue = A0;
+int Value;
 
 void setup() {
   radio.begin();
@@ -15,7 +16,10 @@ void setup() {
   radio.stopListening();
 }
 void loop() {
-  const char text[] = "Hell";
-  radio.write(&text, sizeof(text));
-  delay(1000);
+  Value = analogRead(SensorValue);
+  Serial.println(Value);
+  if(Value>900)
+  {
+  radio.write(&Value, sizeof(Value));
+  }
 }
