@@ -19,6 +19,7 @@ void setup() {
 void loop() {
   Value = analogRead(SensorValue);
   Serial.println(Value);
+  radio.write(&Value, sizeof(Value));
   if(Value>900)
   {
   radio.write(&Value, sizeof(Value));
