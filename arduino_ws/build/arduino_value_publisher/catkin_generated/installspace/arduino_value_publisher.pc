@@ -1,0 +1,8 @@
+prefix=/home/raj/Assistive_Robot_with_EMG/arduino_ws/install
+
+Name: arduino_value_publisher
+Description: Description of arduino_value_publisher
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/raj/Assistive_Robot_with_EMG/arduino_ws/install/lib 
+Requires: 

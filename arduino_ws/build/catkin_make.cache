@@ -1,0 +1,2 @@
+arduino_value_publisher
+-DCATKIN_DEVEL_PREFIX=/home/raj/Assistive_Robot_with_EMG/arduino_ws/devel -DCMAKE_INSTALL_PREFIX=/home/raj/Assistive_Robot_with_EMG/arduino_ws/install -G Unix Makefiles
