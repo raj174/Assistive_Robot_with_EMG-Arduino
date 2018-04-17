@@ -17,11 +17,12 @@ void setup() {
   radio.stopListening();
 }
 void loop() {
-  Value = analogRead(SensorValue);
-  Serial.println(Value);
+  Value = 100;//analogRead(SensorValue);
+  //Serial.println(Value);
   radio.write(&Value, sizeof(Value));
   if(Value>900)
   {
   radio.write(&Value, sizeof(Value));
   }
+  delay(1000);
 }
