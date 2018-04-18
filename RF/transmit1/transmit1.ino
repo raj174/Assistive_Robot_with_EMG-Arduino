@@ -20,7 +20,7 @@ void setup()
   radio.begin();
   Serial.begin(9600);
   radio.setRetries(15,10);
-  radio.openWritingPipe(address[0]);
+  radio.openWritingPipe(address[1]);
   radio.openReadingPipe(0, address[3]);
   radio.setPALevel(RF24_PA_MIN);
   radio.stopListening();
