@@ -8,7 +8,7 @@ byte pipeNum = 0;
 const uint64_t address[] = {0x7878787878LL, 0xB3B4B5B6F1LL, 0xB3B4B5B6CDLL};
 unsigned long previousMillis = 0;
 int prevpipeNum = 0;
-const int interval = 200;
+const int interval = 1000;
 void setup() 
 {
   Serial.begin(9600);
@@ -29,7 +29,7 @@ void loop() {
     radio.read(&text, sizeof(text));
     if (pipeNum == 0)
     {
-      Serial.print("next");
+      Serial.println("next");
       prevpipeNum = pipeNum;
       previousMillis = currentMillis;
     }
@@ -50,8 +50,8 @@ void loop() {
         Serial.println("back");
       }
     }
-    Serial.print(pipeNum);
-    Serial.println(text);
+    //Serial.print(pipeNum);
+    //Serial.println(text);
   }
 
 }

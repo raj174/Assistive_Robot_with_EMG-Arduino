@@ -7,29 +7,32 @@ RF24 radio(3,4); // CE, CSN
 
 //const byte address[6] = "00001";
 const int SensorValue = A0;
-const int threshold = 800;
+int threshold = 700;
 const uint64_t address[] = {0x7878787878LL, 0xB3B4B5B6F1LL, 0xB3B4B5B6CDLL};
 int Value, previousValue;
 bool power = true;
 bool counter = true;
+int prevvalue =0;
+int countertwo=0;
 volatile byte count;
 unsigned long previousMillis = 0; 
-const long interval = 10000;
+const long interval = 30000;
+
 void setup()
 {
   radio.begin();
   Serial.begin(9600);
   radio.setRetries(15,10);
   radio.openWritingPipe(address[0]);
-  radio.openReadingPipe(0, address[3]);
+  //radio.openReadingPipe(0, address[3]);
   radio.setPALevel(RF24_PA_MIN);
   radio.stopListening();
 }
 
-void loop()
-{
+void loop(){
   unsigned long currentMillis = millis();
   Value = analogRead(SensorValue);
+  
   //Serial.println(Value);
   if (currentMillis - previousMillis >= interval) //makes the rf module to sleep if the sensor value hasnt got any signal for a given amount of time
   {
@@ -40,10 +43,11 @@ void loop()
       radio.powerDown();
       power = false;
       count = 0;
+      countertwo =0;
     }
   }
 
-  if(counter == false && previousValue <400){
+  if(counter == false && previousValue <200){
     counter = true;
   }
   previousValue = Value;
@@ -63,7 +67,25 @@ void loop()
     power = true;
     previousMillis = currentMillis;
   }
-  
+  /*
+  if (Value > threshold - 200 && Value < threshold && power ==false && counter == true)
+  {
+    Serial.println("counting2");
+    Serial.println("turnon_new");
+    countertwo++;
+    prevvalue = Value + prevvalue;
+    counter == false;
+
+  }
+  if (countertwo >= 5 && power == false){
+    threshold = prevvalue/countertwo;
+    prevvalue = 0;
+    countertwo = 0;
+    previousMillis = currentMillis;
+    radio.powerUp();
+    power = true;
+  }
+  */
   if (power == true) //if the rf module has powered up and if the sensor vlaue if above the threshold then send it to the receiver
   { 
     //Serial.println(Value);
@@ -73,7 +95,7 @@ void loop()
       Serial.println("sending");
       previousMillis = currentMillis;
       radio.write(&Value, sizeof(Value));
-      delay(400);
+      delay(1000);
     }
   }
     
